@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#0f1117" />
+<title>Nama Anda — Portofolio Pendidik</title>
+<meta name="description" content="Portofolio Nama Anda — Calon Guru / Pendidik Profesional." />
+<style>
+  /* ====== DESIGN TOKENS ====== */
+  :root{
+    --bg:#0f1117; --surface:#1a1d26; --surface-2:#252834;
+    --text:#eceff4; --muted:#9aa3b3; --border:#2a2e3a;
+    --primary:#818cf8; --primary-2:#6366f1;
+    --accent:#fbbf24;
+    --radius:14px; --radius-sm:10px;
+    --shadow:0 8px 24px rgba(0,0,0,.35);
+    --maxw:1100px;
+    --nav-h:60px;
+  }
+  [data-theme="light"]{
+    --bg:#f8fafc; --surface:#ffffff; --surface-2:#f1f5f9;
+    --text:#0f172a; --muted:#64748b; --border:#e2e8f0;
+    --primary:#4f46e5; --primary-2:#6366f1;
+    --accent:#d97706;
+    --shadow:0 8px 24px rgba(15,23,42,.08);
+  }
+
+  /* ====== RESET ====== */
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{
+    scroll-behavior:smooth;
+    scroll-padding-top:calc(var(--nav-h) + 8px);
+    -webkit-text-size-adjust:100%;
+  }
+  body{
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",sans-serif;
+    background:var(--bg);color:var(--text);line-height:1.65;
+    transition:background .3s,color .3s;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{max-width:100%;display:block}
+  a{color:var(--primary);text-decoration:none}
+  a:hover{text-decoration:none}
+  ul{list-style:none}
+  button{font:inherit;color:inherit}
+
+  /* ====== NAVBAR ====== */
+  nav{
+    position:sticky;top:0;z-index:50;
+    display:flex;justify-content:space-between;align-items:center;
+    min-height:var(--nav-h);
+    padding:.85rem 1.5rem;
+    background:color-mix(in srgb,var(--bg) 88%, transparent);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--border);
+  }
+  .nav-logo{font-weight:800;font-size:1.15rem;letter-spacing:.3px;color:var(--text)}
+  .nav-logo span{color:var(--primary)}
+
+  .nav-links{display:flex;gap:1.3rem;font-size:.9rem}
+  .nav-links a{color:var(--muted);transition:color .2s;display:block}
+  .nav-links a:hover{color:var(--primary)}
+
+  .nav-actions{display:flex;gap:.5rem;align-items:center}
+  .theme-btn,
+  .menu-btn{
+    background:var(--surface);border:1px solid var(--border);color:var(--text);
+    min-width:40px;min-height:40px;
+    padding:0 .55rem;border-radius:var(--radius-sm);cursor:pointer;
+    font-size:1.05rem;line-height:1;
+    display:inline-flex;align-items:center;justify-content:center;
+    transition:border-color .2s,background .2s;
+  }
+  .theme-btn:hover,
+  .menu-btn:hover{border-color:var(--primary)}
+  .menu-btn{display:none;font-size:1.2rem}
+
+  @media (max-width:820px){
+    .menu-btn{display:inline-flex}
+    .nav-links{
+      display:none;
+      position:absolute;top:100%;left:0;right:0;
+      background:var(--bg);
+      flex-direction:column;gap:0;
+      padding:.4rem 1.25rem 1rem;
+      border-bottom:1px solid var(--border);
+      box-shadow:var(--shadow);
+      font-size:1rem;
+    }
+    .nav-links.open{display:flex;animation:slideDown .25s ease both}
+    .nav-links li a{
+      padding:.85rem 0;border-bottom:1px solid var(--border);color:var(--text);
+    }
+    .nav-links li:last-child a{border-bottom:0}
+    @keyframes slideDown{
+      from{opacity:0;transform:translateY(-8px)}
+      to{opacity:1;transform:translateY(0)}
+    }
+  }
+
+  /* ====== LAYOUT ====== */
+  section{padding:5rem 1.5rem}
+  .container{max-width:var(--maxw);margin:0 auto;width:100%}
+  .section-head{margin-bottom:2.5rem}
+  .eyebrow{
+    display:inline-block;font-size:.78rem;font-weight:600;letter-spacing:1.2px;
+    color:var(--primary);text-transform:uppercase;margin-bottom:.5rem;
+  }
+  h2.section-title{font-size:clamp(1.55rem,3vw,2.2rem);letter-spacing:-.5px;line-height:1.2}
+  .section-sub{color:var(--muted);margin-top:.4rem;max-width:640px}
+
+  /* ====== COVER ====== */
+  #cover{
+    min-height:calc(100svh - var(--nav-h));
+    display:flex;align-items:center;
+    padding-top:2.5rem;padding-bottom:2.5rem;
+    position:relative;
+  }
+  .hero-grid{
+    display:grid;grid-template-columns:1.2fr .8fr;
+    gap:3rem;align-items:center;width:100%;
+  }
+  .hero-text .greet{color:var(--primary);font-weight:600;margin-bottom:.5rem;font-size:.92rem}
+  .hero-text h1{
+    font-size:clamp(1.9rem,5.5vw,3.4rem);
+    line-height:1.12;letter-spacing:-1px;margin-bottom:1rem;
+  }
+  .hero-text h1 .highlight{
+    background:linear-gradient(135deg,var(--primary),var(--primary-2));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero-role{color:var(--muted);font-size:1.05rem;margin-bottom:1.6rem;max-width:520px}
+  .hero-role strong{color:var(--text)}
+
+  .hero-cta{display:flex;gap:.8rem;flex-wrap:wrap}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+    min-height:46px;padding:.75rem 1.4rem;
+    border-radius:var(--radius-sm);
+    font-weight:600;font-size:.95rem;
+    border:1px solid transparent;cursor:pointer;
+    transition:transform .15s,box-shadow .2s,border-color .2s,color .2s;
+  }
+  .btn:hover{transform:translateY(-2px)}
+  .btn-primary{background:var(--primary);color:#0f1117}
+  .btn-primary:hover{box-shadow:0 10px 24px rgba(129,140,248,.35)}
+  .btn-ghost{background:var(--surface);color:var(--text);border-color:var(--border)}
+  .btn-ghost:hover{border-color:var(--primary);color:var(--primary)}
+
+  .hero-photo{display:flex;justify-content:center}
+  .photo-frame{
+    position:relative;width:280px;height:280px;border-radius:50%;
+    background:linear-gradient(135deg,var(--primary),var(--primary-2));
+    padding:5px;box-shadow:0 20px 60px rgba(129,140,248,.22);
+    max-width:100%;
+  }
+  .photo-frame img{
+    width:100%;height:100%;border-radius:50%;object-fit:cover;
+    border:4px solid var(--bg);
+  }
+  .photo-frame::after{
+    content:"";position:absolute;inset:-12px;border-radius:50%;
+    border:2px dashed var(--primary);opacity:.35;
+    animation:spin 30s linear infinite;
+    pointer-events:none;
+  }
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  @media (max-width:820px){
+    .hero-grid{grid-template-columns:1fr;text-align:center;gap:2rem}
+    .hero-photo{order:-1}
+    .hero-text .greet{font-size:.85rem}
+    .hero-role{margin-left:auto;margin-right:auto}
+    .hero-cta{justify-content:center}
+    .photo-frame{width:200px;height:200px}
+  }
+  @media (max-width:480px){
+    #cover{min-height:auto;padding-top:2rem;padding-bottom:2.5rem}
+    .photo-frame{width:160px;height:160px}
+    .hero-cta{flex-direction:column;width:100%}
+    .hero-cta .btn{width:100%}
+    .hero-role{font-size:.98rem}
+  }
+
+  /* ====== PROFIL SINGKAT ====== */
+  #profile{padding-top:1.5rem}
+  .profile-banner{
+    background:linear-gradient(135deg,var(--surface) 0%,var(--surface-2) 100%);
+    border:1px solid var(--border);border-radius:var(--radius);
+    padding:1.6rem;
+    display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;
+    box-shadow:var(--shadow);
+  }
+  .profile-item h4{
+    font-size:.75rem;color:var(--muted);text-transform:uppercase;
+    letter-spacing:1px;margin-bottom:.3rem;
+  }
+  .profile-item p{font-weight:600;word-break:break-word}
+  @media (max-width:720px){
+    .profile-banner{grid-template-columns:1fr 1fr;padding:1.2rem;gap:1rem}
+    .profile-item:last-child{grid-column:1 / -1}
+  }
+  @media (max-width:420px){
+    .profile-banner{grid-template-columns:1fr}
+  }
+
+  /* ====== ABOUT ====== */
+  #about .about-grid{
+    display:grid;grid-template-columns:1.3fr .7fr;
+    gap:2.5rem;align-items:start;
+  }
+  #about p{color:var(--muted);margin-bottom:1rem}
+  #about p strong{color:var(--text)}
+  .info-card{
+    background:var(--surface);border:1px solid var(--border);
+    border-radius:var(--radius);padding:1.5rem;
+  }
+  .info-card h4{margin-bottom:.8rem;font-size:1rem}
+  .info-list li{
+    display:flex;justify-content:space-between;gap:1rem;
+    padding:.55rem 0;border-bottom:1px dashed var(--border);
+    font-size:.9rem;
+  }
+  .info-list li:last-child{border:0}
+  .info-list .label{color:var(--muted);flex-shrink:0}
+  .info-list .value{font-weight:600;text-align:right;word-break:break-word}
+  @media (max-width:820px){
+    #about .about-grid{grid-template-columns:1fr}
+  }
+
+  /* ====== TIMELINE ====== */
+  .timeline{position:relative;padding-left:2rem}
+  .timeline::before{
+    content:"";position:absolute;left:8px;top:6px;bottom:6px;
+    width:2px;background:linear-gradient(to bottom,var(--primary),transparent);
+  }
+  .tl-item{position:relative;padding-bottom:2rem}
+  .tl-item:last-child{padding-bottom:0}
+  .tl-item::before{
+    content:"";position:absolute;left:-1.65rem;top:6px;
+    width:14px;height:14px;border-radius:50%;
+    background:var(--primary);border:3px solid var(--bg);
+    box-shadow:0 0 0 2px var(--primary);
+  }
+  .tl-date{
+    display:inline-block;font-size:.75rem;font-weight:600;
+    color:var(--primary);
+    background:color-mix(in srgb,var(--primary) 12%,transparent);
+    padding:.15rem .6rem;border-radius:6px;margin-bottom:.4rem;
+  }
+  .tl-title{font-size:1rem;font-weight:700;line-height:1.35}
+  .tl-sub{color:var(--muted);font-size:.88rem;margin-bottom:.4rem}
+  .tl-desc{color:var(--muted);font-size:.9rem}
+  @media (max-width:480px){
+    .timeline{padding-left:1.5rem}
+    .timeline::before{left:6px}
+    .tl-item::before{left:-1.05rem;width:12px;height:12px}
+    .tl-item{padding-bottom:1.6rem}
+  }
+
+  /* ====== SKILLS ====== */
+  .skills-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:1.2rem;
+  }
+  .skill-cat{
+    background:var(--surface);border:1px solid var(--border);
+    border-radius:var(--radius);padding:1.4rem;
+  }
+  .skill-cat h4{margin-bottom:1rem;display:flex;align-items:center;gap:.5rem;font-size:1rem}
+  .skill-item{margin-bottom:.9rem}
+  .skill-item:last-child{margin-bottom:0}
+  .skill-head{display:flex;justify-content:space-between;font-size:.85rem;margin-bottom:.3rem}
+  .skill-head .name{font-weight:600}
+  .skill-head .pct{color:var(--muted)}
+  .bar{height:8px;background:var(--surface-2);border-radius:99px;overflow:hidden}
+  .bar > span{
+    display:block;height:100%;width:0;
+    background:linear-gradient(90deg,var(--primary),var(--primary-2));
+    border-radius:99px;transition:width 1.2s cubic-bezier(.2,.7,.2,1);
+  }
+
+  /* ====== PROJECTS (Hasil Karya) ====== */
+  .projects-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+    gap:1.4rem;
+  }
+  .project{
+    background:var(--surface);border:1px solid var(--border);
+    border-radius:var(--radius);overflow:hidden;
+    display:flex;flex-direction:column;
+    transition:transform .25s,border-color .25s,box-shadow .25s;
+  }
+  .project:hover{transform:translateY(-6px);border-color:var(--primary);box-shadow:var(--shadow)}
+  .project-thumb{
+    height:150px;
+    background:linear-gradient(135deg,var(--surface-2),var(--surface));
+    display:flex;align-items:center;justify-content:center;
+    font-size:2.8rem;
+    border-bottom:1px solid var(--border);
+  }
+  .project-body{padding:1.2rem;flex:1;display:flex;flex-direction:column}
+  .project-body h3{font-size:1.05rem;margin-bottom:.4rem}
+  .project-body p{color:var(--muted);font-size:.88rem;margin-bottom:.9rem;flex:1}
+  .tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.9rem}
+  .tag{
+    font-size:.72rem;font-weight:600;letter-spacing:.3px;
+    padding:.22rem .6rem;border-radius:6px;
+    background:color-mix(in srgb,var(--primary) 14%,transparent);
+    color:var(--primary);
+  }
+  .project-links{display:flex;gap:1rem;font-size:.85rem;flex-wrap:wrap}
+  .project-links a{padding:.35rem 0}
+
+  /* ====== CERTIFICATES ====== */
+  .cert-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+    gap:1rem;
+  }
+  .cert{
+    background:var(--surface);border:1px solid var(--border);
+    border-radius:var(--radius);padding:1.1rem;
+    display:flex;gap:.9rem;align-items:flex-start;
+    transition:border-color .2s,transform .2s;
+  }
+  .cert:hover{border-color:var(--primary);transform:translateY(-3px)}
+  .cert-icon{
+    flex-shrink:0;width:42px;height:42px;border-radius:10px;
+    background:linear-gradient(135deg,var(--primary),var(--primary-2));
+    display:flex;align-items:center;justify-content:center;
+    font-size:1.2rem;color:#0f1117;
+  }
+  .cert h4{font-size:.95rem;margin-bottom:.15rem;line-height:1.3}
+  .cert p{font-size:.82rem;color:var(--muted)}
+  .cert a{font-size:.82rem;display:inline-block;margin-top:.4rem;padding:.2rem 0}
+
+  /* ====== ACHIEVEMENTS ====== */
+  .ach-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:1rem;
+  }
+  .ach-card{
+    background:var(--surface);border:1px solid var(--border);
+    border-radius:var(--radius);padding:1.3rem;
+    position:relative;overflow:hidden;
+  }
+  .ach-card::before{
+    content:"";position:absolute;top:0;left:0;right:0;height:3px;
+    background:linear-gradient(90deg,var(--primary),var(--accent));
+  }
+  .ach-card .num{font-size:1.9rem;font-weight:800;color:var(--primary);line-height:1}
+  .ach-card .lbl{color:var(--muted);font-size:.86rem;margin-top:.3rem}
+
+  /* ====== CONTACT ====== */
+  #contact{text-align:center}
+  #contact .section-head{text-align:center}
+  #contact .section-sub{margin-left:auto;margin-right:auto}
+  .contact-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:1rem;margin-top:2rem;
+  }
+  .contact-card{
+    background:var(--surface);border:1px solid var(--border);
+    border-radius:var(--radius);padding:1.3rem 1rem;
+    min-height:110px;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    transition:transform .2s,border-color .2s;
+    color:var(--text);
+  }
+  .contact-card:hover,
+  .contact-card:active{transform:translateY(-3px);border-color:var(--primary)}
+  .contact-card .ic{font-size:1.6rem;margin-bottom:.5rem}
+  .contact-card .k{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+  .contact-card .v{font-weight:600;color:var(--text);font-size:.9rem;word-break:break-word;margin-top:.15rem}
+
+  /* ====== FOOTER ====== */
+  footer{
+    text-align:center;padding:2rem 1.25rem;color:var(--muted);
+    font-size:.85rem;border-top:1px solid var(--border);
+  }
+
+  /* ====== REVEAL ANIM ====== */
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.visible{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+    .reveal{opacity:1;transform:none}
+  }
+
+  /* ====== MOBILE TWEAKS ====== */
+  @media (max-width:640px){
+    section{padding:3.2rem 1.1rem}
+    nav{padding:.7rem 1rem}
+    .section-head{margin-bottom:1.8rem}
+    h2.section-title{letter-spacing:-.3px}
+  }
+  @media (max-width:380px){
+    section{padding:2.6rem .9rem}
+    .hero-text h1{font-size:1.7rem}
+    .contact-grid{grid-template-columns:1fr}
+  }
+  @supports (padding: max(0px)){
+    nav{padding-left:max(1.5rem, env(safe-area-inset-left));padding-right:max(1.5rem, env(safe-area-inset-right))}
+    footer{padding-bottom:max(2rem, env(safe-area-inset-bottom))}
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<nav>
+  <a href="#cover" class="nav-logo">Nama<span>.</span></a>
+
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#cover">Home</a></li>
+    <li><a href="#about">Tentang</a></li>
+    <li><a href="#education">Pendidikan</a></li>
+    <li><a href="#experience">Pengalaman</a></li>
+    <li><a href="#skills">Keahlian</a></li>
+    <li><a href="#projects">Karya</a></li>
+    <li><a href="#certs">Sertifikat</a></li>
+    <li><a href="#contact">Kontak</a></li>
+  </ul>
+
+  <div class="nav-actions">
+    <button class="theme-btn" id="themeBtn" aria-label="Ganti tema">🌙</button>
+    <button class="menu-btn" id="menuBtn" aria-label="Buka menu" aria-expanded="false" aria-controls="navLinks">☰</button>
+  </div>
+</nav>
+
+<!-- ================= 1. COVER ================= -->
+<section id="cover">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-text">
+        <div class="greet">👋 Selamat datang di portofolio saya</div>
+        <h1>Halo, saya <span class="highlight">Nama Anda</span><br>Calon Guru Profesional.</h1>
+        <p class="hero-role">
+          Saya mahasiswa <strong>Pendidikan Guru Sekolah Dasar</strong> yang
+          bersemangat dalam merancang pembelajaran yang <em>menyenangkan,
+          bermakna,</em> dan <em>berpusat pada siswa</em>.
+        </p>
+        <div class="hero-cta">
+          <a href="#projects" class="btn btn-primary">Lihat Karya →</a>
+          <a href="#contact" class="btn btn-ghost">Hubungi Saya</a>
+        </div>
+      </div>
+      <div class="hero-photo">
+        <div class="photo-frame">
+          <img src="https://i.pravatar.cc/400?img=32" alt="Foto Nama Anda" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 2. PROFIL SINGKAT ================= -->
+<section id="profile">
+  <div class="container reveal">
+    <div class="profile-banner">
+      <div class="profile-item">
+        <h4>Nama Lengkap</h4>
+        <p>Nama Anda, S.Pd.</p>
+      </div>
+      <div class="profile-item">
+        <h4>Bidang</h4>
+        <p>Pendidikan Guru Sekolah Dasar</p>
+      </div>
+      <div class="profile-item">
+        <h4>Lokasi</h4>
+        <p>Yogyakarta, Indonesia</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 3. ABOUT ME ================= -->
+<section id="about">
+  <div class="container reveal">
+    <div class="section-head">
+      <span class="eyebrow">Tentang Saya</span>
+      <h2 class="section-title">Kenali saya lebih dekat</h2>
+    </div>
+
+    <div class="about-grid">
+      <div>
+        <p>
+          Saya adalah seorang <strong>calon guru</strong> lulusan S1 Pendidikan
+          Guru Sekolah Dasar yang percaya bahwa setiap anak memiliki potensi
+          unik yang perlu difasilitasi dengan pendekatan yang tepat. Saya
+          senang menciptakan pembelajaran yang <em>aktif, kreatif, dan
+          menyenangkan</em>.
+        </p>
+        <p>
+          Selama kuliah, saya aktif mengikuti program <strong>PPL (Praktik
+          Pengalaman Lapangan)</strong> di sekolah dasar, menjadi asisten guru,
+          dan mengajar les privat. Saya juga sering membuat media pembelajaran
+          digital dan modul ajar berbasis Kurikulum Merdeka.
+        </p>
+        <p>
+          <strong>Tujuan saya:</strong> menjadi guru yang tidak hanya
+          menyampaikan materi, tapi juga <em>menginspirasi</em> dan
+          <em>menumbuhkan karakter</em> peserta didik — sesuai semboyan
+          "Ing Ngarsa Sung Tuladha, Ing Madya Mangun Karsa, Tut Wuri Handayani".
+        </p>
+      </div>
+
+      <div class="info-card">
+        <h4>📌 Data Singkat</h4>
+        <ul class="info-list">
+          <li><span class="label">Nama</span><span class="value">Nama Anda</span></li>
+          <li><span class="label">Usia</span><span class="value">22 tahun</span></li>
+          <li><span class="label">Lokasi</span><span class="value">Yogyakarta</span></li>
+          <li><span class="label">Bahasa</span><span class="value">ID, EN</span></li>
+          <li><span class="label">Fokus</span><span class="value">PGSD</span></li>
+          <li><span class="label">Email</span><span class="value">email@anda.com</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 4. EDUCATION ================= -->
+<section id="education">
+  <div class="container reveal">
+    <div class="section-head">
+      <span class="eyebrow">Pendidikan</span>
+      <h2 class="section-title">Riwayat Pendidikan</h2>
+      <p class="section-sub">Perjalanan akademik yang membentuk saya sebagai pendidik.</p>
+    </div>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <span class="tl-date">2020 — 2024</span>
+        <div class="tl-title">S1 Pendidikan Guru Sekolah Dasar</div>
+        <div class="tl-sub">Universitas Contoh Indonesia — IPK 3.85 / 4.00</div>
+        <p class="tl-desc">Fokus pada pembelajaran tematik, psikologi anak, dan pengembangan media ajar. Skripsi tentang "Pengembangan Media Pembelajaran Interaktif Berbasis Canva untuk Materi IPAS Kelas IV SD".</p>
+      </div>
+      <div class="tl-item">
+        <span class="tl-date">2017 — 2020</span>
+        <div class="tl-title">SMA Jurusan IPS</div>
+        <div class="tl-sub">SMA Negeri 1 Contoh — Lulus dengan predikat</div>
+        <p class="tl-desc">Aktif di OSIS bidang pendidikan dan menjadi relawan mengajar anak-anak di TPQ sekitar sekolah.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 5. EXPERIENCE ================= -->
+<section id="experience">
+  <div class="container reveal">
+    <div class="section-head">
+      <span class="eyebrow">Pengalaman</span>
+      <h2 class="section-title">Pengalaman Mengajar & Organisasi</h2>
+      <p class="section-sub">PPL, asisten guru, les privat, dan kegiatan volunteer pendidikan.</p>
+    </div>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <span class="tl-date">Jul 2023 — Des 2023</span>
+        <div class="tl-title">PPL II — Guru Praktikan</div>
+        <div class="tl-sub">SD Negeri 1 Contoh — Yogyakarta</div>
+        <p class="tl-desc">Mengajar mata pelajaran IPAS dan Matematika untuk kelas IV selama 3 bulan. Menyusun modul ajar Kurikulum Merdeka, membuat media pembelajaran berbasis Canva & Quizizz, dan melakukan asesmen formatif.</p>
+      </div>
+      <div class="tl-item">
+        <span class="tl-date">Feb 2023 — Jun 2023</span>
+        <div class="tl-title">Asisten Guru (Volunteer)</div>
+        <div class="tl-sub">SD Islam Contoh — Yogyakarta</div>
+        <p class="tl-desc">Mendampingi guru kelas dalam pembelajaran membaca, menulis, dan berhitung. Membantu membuat lembar kerja siswa dan mengelola kelas.</p>
+      </div>
+      <div class="tl-item">
+        <span class="tl-date">2022 — Sekarang</span>
+        <div class="tl-title">Tutor Les Privat</div>
+        <div class="tl-sub">Freelance — SD & SMP</div>
+        <p class="tl-desc">Mengajar les privat Matematika dan Bahasa Inggris untuk 10+ siswa SD dan SMP. Merancang materi belajar personal sesuai kebutuhan siswa.</p>
+      </div>
+      <div class="tl-item">
+        <span class="tl-date">2021 — 2023</span>
+        <div class="tl-title">Sekretaris Divisi Pendidikan</div>
+        <div class="tl-sub">Himpunan Mahasiswa PGSD</div>
+        <p class="tl-desc">Mengkoordinasi program "Guru Berbagi" — kelas mengajar gratis untuk anak-anak di panti asuhan setiap bulan.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 6. SKILLS ================= -->
+<section id="skills">
+  <div class="container reveal">
+    <div class="section-head">
+      <span class="eyebrow">Keahlian</span>
+      <h2 class="section-title">Skill & Kompetensi</h2>
+      <p class="section-sub">Keterampilan pedagogik, komunikasi, dan teknologi pendidikan.</p>
+    </div>
+
+    <div class="skills-grid">
+      <div class="skill-cat">
+        <h4>🎓 Pedagogik & Kurikulum</h4>
+        <div class="skill-item">
+          <div class="skill-head"><span class="name">Perencanaan Pembelajaran</span><span class="pct">92%</span></div>
+          <div class="bar"><span data-w="92"></span></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-head"><span class="name">Kurikulum Merdeka</span><span class="pct">90%</span></div>
+          <div class="bar"><span data-w="90"></span></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-head"><span class="name">Manajemen Kelas</span><span class="pct">88%</span></div>
+          <div class="bar"><span data-w="88"></span></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-head"><span class="name">Asesmen & Evaluasi</span><span class="pct">85%</span></div>
+          <div class="bar"><span data-w="85"></span></div>
+        </div>
+      </div>
+
+      <div class="skill-cat">
+        <h4>💻 Teknologi & Media</h4>
+        <div class="skill-item">
+          <div class="skill-head"><span class="name">Canva untuk Media Ajar</span><span class="pct">94%</span></div>
+          <div class="bar"><span data-w="94"></span></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-head"><span class="name">Google Workspace Education</span><span class="pct">90%</span></div>
+          <div class="bar"><span data-w="90"></span></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-head"><span class="name">Quizizz / Kahoot</span><span class="pct">88%</span></div>
+          <div class="bar"><span data-w="88"></span></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-head"><span class="name">Video Editing (CapCut)</span><span class="pct">80%</span></div>
+          <div class="bar"><span data-w="80"></span></div>
+        </div>
+      </div>
+
+      <div class="skill-cat">
+        <h4>🗣️ Komunikasi & Bahasa</h4>
+        <div class="skill-item">
+          <div class="skill-head"><span class="name">Public Speaking</span><span class="pct">90%</span></div>
+          <div class="bar"><span data-w="90"></span></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-head"><span class="name">Bahasa Indonesia</span><span class="pct">95%</span></div>
+          <div class="bar"><span data-w="95"></span></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-head"><span class="name">Bahasa Inggris</span><span class="pct">82%</span></div>
+          <div class="bar"><span data-w="82"></span></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-head"><span class="name">Menulis Kreatif</span><span class="pct">85%</span></div>
+          <div class="bar"><span data-w="85"></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 7. PROJECTS / KARYA ================= -->
+<section id="projects">
+  <div class="container reveal">
+    <div class="section-head">
+      <span class="eyebrow">Hasil Karya</span>
+      <h2 class="section-title">Karya Pembelajaran</h2>
+      <p class="section-sub">Modul ajar, media pembelajaran, video edukasi, dan lainnya.</p>
+    </div>
+
+    <div class="projects-grid">
+      <article class="project">
+        <div class="project-thumb">📖</div>
+        <div class="project-body">
+          <h3>Modul Ajar IPAS Kelas IV</h3>
+          <p>Modul ajar Kurikulum Merdeka untuk materi "Bentuk dan Fungsi Tubuh Manusia" dengan LKPD dan asesmen.</p>
+          <div class="tags"><span class="tag">Kurikulum Merdeka</span><span class="tag">IPAS</span></div>
+          <div class="project-links">
+            <a href="#">Lihat →</a>
+            <a href="#">Download</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="project-thumb">🎨</div>
+        <div class="project-body">
+          <h3>Media Pembelajaran Interaktif</h3>
+          <p>Media ajar berbasis Canva untuk materi perkalian kelas III SD, dilengkapi animasi & latihan.</p>
+          <div class="tags"><span class="tag">Canva</span><span class="tag">Matematika</span></div>
+          <div class="project-links">
+            <a href="#">Lihat →</a>
+            <a href="#">Demo</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="project-thumb">🎬</div>
+        <div class="project-body">
+          <h3>Video Pembelajaran</h3>
+          <p>Video animasi pembelajaran "Siklus Air" untuk kelas V SD yang diunggah ke YouTube.</p>
+          <div class="tags"><span class="tag">Video</span><span class="tag">Animasi</span></div>
+          <div class="project-links">
+            <a href="#">Tonton →</a>
+            <a href="#">YouTube</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="project-thumb">📊</div>
+        <div class="project-body">
+          <h3>Bank Soal & Asesmen</h3>
+          <p>Kumpulan soal HOTS dan asesmen formatif untuk kelas IV-VI SD, lengkap dengan kisi-kisi.</p>
+          <div class="tags"><span class="tag">Asesmen</span><span class="tag">HOTS</span></div>
+          <div class="project-links">
+            <a href="#">Lihat →</a>
+            <a href="#">Download</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="project-thumb">🧪</div>
+        <div class="project-body">
+          <h3>Praktikum Sederhana IPA</h3>
+          <p>Panduan eksperimen sains sederhana dengan alat rumah tangga untuk kelas IV-VI SD.</p>
+          <div class="tags"><span class="tag">IPA</span><span class="tag">Praktikum</span></div>
+          <div class="project-links">
+            <a href="#">Lihat →</a>
+            <a href="#">Download</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="project-thumb">📚</div>
+        <div class="project-body">
+          <h3>Program Literasi Kelas</h3>
+          <p>Rancangan program "15 Menit Membaca" dengan kartu baca dan jurnal literasi siswa.</p>
+          <div class="tags"><span class="tag">Literasi</span><span class="tag">Program</span></div>
+          <div class="project-links">
+            <a href="#">Lihat →</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 8. CERTIFICATES ================= -->
+<section id="certs">
+  <div class="container reveal">
+    <div class="section-head">
+      <span class="eyebrow">Sertifikat</span>
+      <h2 class="section-title">Sertifikat & Pelatihan</h2>
+      <p class="section-sub">Bukti kompetensi dari pelatihan, seminar, dan sertifikasi resmi.</p>
+    </div>
+
+    <div class="cert-grid">
+      <div class="cert">
+        <div class="cert-icon">🏅</div>
+        <div>
+          <h4>Pelatihan Kurikulum Merdeka</h4>
+          <p>Kemendikbudristek · 2023</p>
+          <a href="#">Lihat →</a>
+        </div>
+      </div>
+      <div class="cert">
+        <div class="cert-icon">🏅</div>
+        <div>
+          <h4>Microsoft Educator Center</h4>
+          <p>Microsoft · 2023</p>
+          <a href="#">Lihat →</a>
+        </div>
+      </div>
+      <div class="cert">
+        <div class="cert-icon">🏅</div>
+        <div>
+          <h4>TOEFL ITP — Score 550</h4>
+          <p>IIEF · 2023</p>
+          <a href="#">Lihat →</a>
+        </div>
+      </div>
+      <div class="cert">
+        <div class="cert-icon">🏅</div>
+        <div>
+          <h4>Pelatihan Media Ajar Digital</h4>
+          <p>SEAMEO QITEP · 2022</p>
+          <a href="#">Lihat →</a>
+        </div>
+      </div>
+      <div class="cert">
+        <div class="cert-icon">🏅</div>
+        <div>
+          <h4>Seminar Psikologi Anak</h4>
+          <p>Universitas Contoh · 2022</p>
+          <a href="#">Lihat →</a>
+        </div>
+      </div>
+      <div class="cert">
+        <div class="cert-icon">🏅</div>
+        <div>
+          <h4>Pelatihan Kelas Berdiferensiasi</h4>
+          <p>Guru Belajar · 2024</p>
+          <a href="#">Lihat →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 9. ACHIEVEMENTS ================= -->
+<section id="achievements">
+  <div class="container reveal">
+    <div class="section-head">
+      <span class="eyebrow">Pencapaian</span>
+      <h2 class="section-title">Prestasi & Pencapaian</h2>
+      <p class="section-sub">Momen penting selama menempuh pendidikan dan mengajar.</p>
+    </div>
+
+    <div class="ach-grid">
+      <div class="ach-card">
+        <div class="num">3.85</div>
+        <div class="lbl">IPK akhir S1 PGSD (Cumlaude)</div>
+      </div>
+      <div class="ach-card">
+        <div class="num">Juara 1</div>
+        <div class="lbl">Lomba Microteaching tingkat universitas</div>
+      </div>
+      <div class="ach-card">
+        <div class="num">100+</div>
+        <div class="lbl">Jam mengajar (PPL + les + volunteer)</div>
+      </div>
+      <div class="ach-card">
+        <div class="num">20+</div>
+        <div class="lbl">Media & modul ajar dibuat</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 10. CONTACT ================= -->
+<section id="contact">
+  <div class="container reveal">
+    <div class="section-head">
+      <span class="eyebrow">Kontak</span>
+      <h2 class="section-title">Mari Terhubung</h2>
+      <p class="section-sub">
+        Tertarik berkolaborasi dalam proyek pendidikan, mengundang untuk
+        mengajar, atau sekadar berdiskusi? Silakan hubungi saya.
+      </p>
+    </div>
+
+    <div class="contact-grid">
+      <a class="contact-card" href="mailto:email@anda.com">
+        <div class="ic">✉️</div>
+        <div class="k">Email</div>
+        <div class="v">email@anda.com</div>
+      </a>
+      <a class="contact-card" href="tel:+6281234567890">
+        <div class="ic">📞</div>
+        <div class="k">Telepon</div>
+        <div class="v">+62 812-3456-7890</div>
+      </a>
+      <a class="contact-card" href="https://wa.me/6281234567890" target="_blank" rel="noopener">
+        <div class="ic">💬</div>
+        <div class="k">WhatsApp</div>
+        <div class="v">Chat sekarang</div>
+      </a>
+      <a class="contact-card" href="https://linkedin.com/in/username" target="_blank" rel="noopener">
+        <div class="ic">💼</div>
+        <div class="k">LinkedIn</div>
+        <div class="v">in/username</div>
+      </a>
+      <a class="contact-card" href="https://instagram.com/username" target="_blank" rel="noopener">
+        <div class="ic">📸</div>
+        <div class="k">Instagram</div>
+        <div class="v">@username</div>
+      </a>
+      <a class="contact-card" href="https://youtube.com/@username" target="_blank" rel="noopener">
+        <div class="ic">🎬</div>
+        <div class="k">YouTube</div>
+        <div class="v">Video Ajar</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  © <span id="year"></span> Nama Anda · Pendidik · Dibuat dengan ❤️
+</footer>
+
+<!-- ================= SCRIPT ================= -->
+<script>
+  /* Tahun otomatis */
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  /* Tema */
+  const themeBtn = document.getElementById('themeBtn');
+  const savedTheme = localStorage.getItem('theme');
+  applyTheme(savedTheme || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'));
+
+  themeBtn.addEventListener('click', () => {
+    const current = document.documentElement.getAttribute('data-theme');
+    applyTheme(current === 'light' ? 'dark' : 'light');
+  });
+
+  function applyTheme(t){
+    document.documentElement.setAttribute('data-theme', t);
+    localStorage.setItem('theme', t);
+    themeBtn.textContent = t === 'light' ? '☀️' : '🌙';
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.content = t === 'light' ? '#f8fafc' : '#0f1117';
+  }
+
+  /* Hamburger menu */
+  const menuBtn  = document.getElementById('menuBtn');
+  const navLinks = document.getElementById('navLinks');
+
+  menuBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const open = navLinks.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', open);
+    menuBtn.textContent = open ? '✕' : '☰';
+  });
+
+  navLinks.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+      menuBtn.textContent = '☰';
+    });
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!navLinks.contains(e.target) && !menuBtn.contains(e.target)){
+      navLinks.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+      menuBtn.textContent = '☰';
+    }
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 820){
+      navLinks.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+      menuBtn.textContent = '☰';
+    }
+  });
+
+  /* Skill bar */
+  const bars = document.querySelectorAll('.bar > span');
+  const barObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting){
+        e.target.style.width = e.target.dataset.w + '%';
+        barObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  bars.forEach(b => barObserver.observe(b));
+
+  /* Reveal on scroll */
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting){
+        e.target.classList.add('visible');
+        revealObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+</script>
+
+</body>
+</html>
